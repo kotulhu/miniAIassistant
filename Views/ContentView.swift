@@ -114,30 +114,43 @@ struct ContentView: View {
         var messages = ChatStorage.shared.loadMessages()
         var summary: String? = nil
 
-        // Если сообщений больше 20 — сжимаем историю
+        // Если сообщений больше 20 — сжимаем историю (входной текст тоже ограничиваем)
         if messages.count > 20 {
             let toSummarize = Array(messages.prefix(messages.count - 10))
-
-            // Превращаем в string
             let textToSummarize = toSummarize.map {
                 "\($0["role"] ?? ""): \($0["content"] ?? "")"
             }.joined(separator: "\n")
-
-            summary = generateSummary(from: textToSummarize)
+            
+            // Ограничиваем длину текста для summary жёстко
+            let trimmedTextToSummarize = String(textToSummarize.prefix(1200))
+            summary = generateSummary(from: trimmedTextToSummarize)
         }
 
-        // Берем последние 10 сообщений
-        var limitedMessages = Array(messages.suffix(10))
+        // Берем последние 10 сообщений, жёстко ограничиваем длину каждого контента (например, 300 символов)
+        var limitedMessages = Array(messages.suffix(15)).map { msg -> [String: String] in
+            var copy = msg
+            if let content = copy["content"], content.count > 800 {
+                copy["content"] = String(content.prefix(800)) + "…"
+            }
+            return copy
+        }
 
-        // Добавляем сжатую историю как system
+        // Добавляем сжатую историю как system, если есть
         if let summary = summary {
-            limitedMessages.insert(["role": "system", "content": "Контекст предыдущего диалога: \(summary)"], at: 0)
+            limitedMessages.insert(["role": "system", "content": "Контекст предыдущего диалога не более 1500 символов: \(summary)"], at: 0)
         }
 
-        // Добавляем текущий вопрос
-        limitedMessages.append(["role": "user", "content": prompt])
+        // Добавляем текущий вопрос, ограниченный 500 символами
+        let trimmedPrompt = String(prompt.prefix(1000))
+        limitedMessages.append(["role": "user", "content": trimmedPrompt])
 
-        // Готовим запрос
+        // Логируем для отладки
+        print("Отправляем сообщений: \(limitedMessages.count)")
+        for (i, msg) in limitedMessages.enumerated() {
+            print("Сообщение \(i): role=\(msg["role"] ?? ""), length=\(msg["content"]?.count ?? 0)")
+        }
+
+        // Формируем запрос
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -146,7 +159,8 @@ struct ContentView: View {
 
         let body: [String: Any] = [
             "model": selectedModel,
-            "messages": limitedMessages
+            "messages": limitedMessages,
+            "max_tokens": 1000 // Можно понизить при необходимости
         ]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
 
@@ -178,6 +192,7 @@ struct ContentView: View {
         }.resume()
     }
 
+
     func generateSummary(from text: String) -> String? {
         let url = URL(string: "https://api.openai.com/v1/chat/completions")!
         var request = URLRequest(url: url)
@@ -185,14 +200,21 @@ struct ContentView: View {
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
+        // Жестко ограничиваем длину текста, чтобы избежать превышения лимита токенов
+        let maxSummaryInputLength = 1000
+        let trimmedText = text.count > maxSummaryInputLength
+            ? String(text.prefix(maxSummaryInputLength)) + "…"
+            : text
+
         let summaryPrompt = [
             ["role": "system", "content": "Ты помощник, который умеет сжимать переписку в краткое содержание."],
-            ["role": "user", "content": "Сожми следующую переписку в краткий абзац для подстановки в system-промт:\n\n\(text)"]
+            ["role": "user", "content": "Сожми следующую переписку в краткий абзац для подстановки в system-промт:\n\n\(trimmedText)"]
         ]
 
         let body: [String: Any] = [
             "model": selectedModel,
-            "messages": summaryPrompt
+            "messages": summaryPrompt,
+            "max_tokens": 300
         ]
 
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
@@ -201,20 +223,41 @@ struct ContentView: View {
         let group = DispatchGroup()
         group.enter()
 
-        URLSession.shared.dataTask(with: request) { data, _, err in
+        URLSession.shared.dataTask(with: request) { data, response, err in
             defer { group.leave() }
 
-            if let data = data,
-               let result = try? JSONDecoder().decode(OpenAIResponse.self, from: data),
-               let summary = result.choices.first?.message.content {
-                resultSummary = summary
-            } else {
-                print("❌ Не удалось получить summary")
+            if let err = err {
+                print("❌ Ошибка запроса summary: \(err.localizedDescription)")
+                return
+            }
+
+            guard let data = data else {
+                print("❌ Нет данных при запросе summary")
+                return
+            }
+
+            do {
+                let result = try JSONDecoder().decode(OpenAIResponse.self, from: data)
+                resultSummary = result.choices.first?.message.content
+            } catch {
+                print("❌ Ошибка декодирования summary: \(error.localizedDescription)")
+                if let raw = String(data: data, encoding: .utf8) {
+                    print("Ответ:\n\(raw)")
+                }
             }
         }.resume()
 
         group.wait()
         return resultSummary
+    }
+
+    
+    func trimMessage(_ message: [String: String], maxChars: Int = 1000) -> [String: String] {
+        var trimmed = message
+        if let content = message["content"], content.count > maxChars {
+            trimmed["content"] = String(content.prefix(maxChars)) + "…"
+        }
+        return trimmed
     }
 
     
