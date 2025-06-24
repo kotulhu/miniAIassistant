@@ -10,6 +10,9 @@
 		5014B65F2E067B72003CCF1A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5014B65C2E067B72003CCF1A /* ContentView.swift */; };
 		5014B6702E068F3E003CCF1A /* SQLite in Frameworks */ = {isa = PBXBuildFile; productRef = 5014B66F2E068F3E003CCF1A /* SQLite */; };
 		5014B6722E069FE1003CCF1A /* ChatStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5014B6712E069FD6003CCF1A /* ChatStorage.swift */; };
+		5030C4C82E092A93002FA399 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C72E092A8E002FA399 /* ChatView.swift */; };
+		5030C4CA2E092AAF002FA399 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C92E092AAC002FA399 /* SettingsView.swift */; };
+		5030C4CC2E092AC8002FA399 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4CB2E092AC6002FA399 /* AboutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +20,9 @@
 		5014B66A2E067E73003CCF1A /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		5014B66B2E067E82003CCF1A /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		5014B6712E069FD6003CCF1A /* ChatStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStorage.swift; sourceTree = "<group>"; };
+		5030C4C72E092A8E002FA399 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		5030C4C92E092AAC002FA399 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5030C4CB2E092AC6002FA399 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		504DD81C2E054358006D5586 /* miniGPTdesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniGPTdesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -52,6 +58,9 @@
 		5014B6672E067E4E003CCF1A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5030C4CB2E092AC6002FA399 /* AboutView.swift */,
+				5030C4C92E092AAC002FA399 /* SettingsView.swift */,
+				5030C4C72E092A8E002FA399 /* ChatView.swift */,
 				5014B65C2E067B72003CCF1A /* ContentView.swift */,
 			);
 			path = Views;
@@ -170,7 +179,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5030C4CA2E092AAF002FA399 /* SettingsView.swift in Sources */,
+				5030C4C82E092A93002FA399 /* ChatView.swift in Sources */,
 				5014B65F2E067B72003CCF1A /* ContentView.swift in Sources */,
+				5030C4CC2E092AC8002FA399 /* AboutView.swift in Sources */,
 				5014B6722E069FE1003CCF1A /* ChatStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
