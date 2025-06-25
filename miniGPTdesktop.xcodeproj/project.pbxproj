@@ -13,6 +13,10 @@
 		5030C4C82E092A93002FA399 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C72E092A8E002FA399 /* ChatView.swift */; };
 		5030C4CA2E092AAF002FA399 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C92E092AAC002FA399 /* SettingsView.swift */; };
 		5030C4CC2E092AC8002FA399 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4CB2E092AC6002FA399 /* AboutView.swift */; };
+		508B2CE62E0B164600294DD6 /* ChatUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE52E0B163F00294DD6 /* ChatUtils.swift */; };
+		508B2CE82E0B172600294DD6 /* ProviderConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE72E0B170800294DD6 /* ProviderConfig.swift */; };
+		508B2CEA2E0B1B1200294DD6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE92E0B1B0C00294DD6 /* Models.swift */; };
+		50A0E6862E0A8DCC004FCE1C /* AIProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50A0E6852E0A8DAD004FCE1C /* AIProviderRegistry.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +28,11 @@
 		5030C4C92E092AAC002FA399 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5030C4CB2E092AC6002FA399 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		504DD81C2E054358006D5586 /* miniGPTdesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniGPTdesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		508B2CE52E0B163F00294DD6 /* ChatUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUtils.swift; sourceTree = "<group>"; };
+		508B2CE72E0B170800294DD6 /* ProviderConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfig.swift; sourceTree = "<group>"; };
+		508B2CE92E0B1B0C00294DD6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		50A0E6842E0A8C43004FCE1C /* AIProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvider.swift; sourceTree = "<group>"; };
+		50A0E6852E0A8DAD004FCE1C /* AIProviderRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProviderRegistry.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -49,6 +58,10 @@
 		5014B6662E067E40003CCF1A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				508B2CE92E0B1B0C00294DD6 /* Models.swift */,
+				508B2CE72E0B170800294DD6 /* ProviderConfig.swift */,
+				50A0E6852E0A8DAD004FCE1C /* AIProviderRegistry.swift */,
+				50A0E6842E0A8C43004FCE1C /* AIProvider.swift */,
 				5014B66B2E067E82003CCF1A /* Message.swift */,
 				5014B66A2E067E73003CCF1A /* Chat.swift */,
 			);
@@ -84,6 +97,7 @@
 		504DD8132E054358006D5586 = {
 			isa = PBXGroup;
 			children = (
+				508B2CE42E0B163800294DD6 /* Utils */,
 				5014B6692E067E62003CCF1A /* App */,
 				5014B6682E067E5A003CCF1A /* Persistence */,
 				5014B6672E067E4E003CCF1A /* Views */,
@@ -99,6 +113,14 @@
 				504DD81C2E054358006D5586 /* miniGPTdesktop.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		508B2CE42E0B163800294DD6 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				508B2CE52E0B163F00294DD6 /* ChatUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,9 +203,13 @@
 			files = (
 				5030C4CA2E092AAF002FA399 /* SettingsView.swift in Sources */,
 				5030C4C82E092A93002FA399 /* ChatView.swift in Sources */,
+				508B2CE62E0B164600294DD6 /* ChatUtils.swift in Sources */,
+				50A0E6862E0A8DCC004FCE1C /* AIProviderRegistry.swift in Sources */,
 				5014B65F2E067B72003CCF1A /* ContentView.swift in Sources */,
+				508B2CE82E0B172600294DD6 /* ProviderConfig.swift in Sources */,
 				5030C4CC2E092AC8002FA399 /* AboutView.swift in Sources */,
 				5014B6722E069FE1003CCF1A /* ChatStorage.swift in Sources */,
+				508B2CEA2E0B1B1200294DD6 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

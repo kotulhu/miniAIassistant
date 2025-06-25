@@ -107,5 +107,35 @@ class ChatStorage {
 
         sqlite3_finalize(stmt)
     }
+    
+    func loadMessages(forChatId chatId: Int64) -> [[String: String]] {
+        let query = """
+        SELECT role, content FROM messages
+        WHERE chat_id = ?
+        ORDER BY id ASC;
+        """
+
+        var stmt: OpaquePointer?
+        var result: [[String: String]] = []
+
+        if sqlite3_prepare_v2(db, query, -1, &stmt, nil) == SQLITE_OK {
+            sqlite3_bind_int64(stmt, 1, chatId)
+
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                if let roleCStr = sqlite3_column_text(stmt, 0),
+                   let contentCStr = sqlite3_column_text(stmt, 1) {
+                    let role = String(cString: roleCStr)
+                    let content = String(cString: contentCStr)
+                    result.append(["role": role, "content": content])
+                }
+            }
+        } else {
+            print("❌ Failed to prepare message query")
+        }
+
+        sqlite3_finalize(stmt)
+        return result
+    }
+
 
 }
