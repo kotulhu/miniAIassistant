@@ -1,0 +1,35 @@
+
+{
+  "providers": [
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "apiKeyName": "apiKey",
+      "apiURL": "https://api.openai.com/v1/chat/completions",
+      "summarizationURL": "https://api.openai.com/v1/chat/completions",
+      "supportsSummarization": true,
+      "defaultModel": "gpt-3.5-turbo",
+      "supportedModels": [
+        "gpt-3.5-turbo",
+        "gpt-4",
+        "gpt-4o"
+      ]
+    },
+    {
+      "id": "openrouter",
+      "name": "OpenRouter",
+      "apiKeyName": "openRouterKey",
+      "apiURL": "https://openrouter.ai/api/v1/chat/completions",
+      "summarizationURL": null,
+      "supportsSummarization": false,
+      "defaultModel": "mistralai/mistral-small-3.2",
+      "supportedModels": [
+        "mistralai/mistral-small-3.2",
+        "mistralai/devstral-small",
+        "meta-llama/llama-3-8b-instruct",
+        "moonshot/moonshot-72b-chat",
+        "deepseek/deepseek-8b"
+      ]
+    }
+  ]
+}

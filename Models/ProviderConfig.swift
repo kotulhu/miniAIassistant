@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct ProviderConfig {
+struct ProviderConfig: Codable {
     let id: String
     let name: String
-    let apiKey: String
+    //let apiKey: String
+    let apiKeyName: String
     let apiURL: URL
     let summarizationURL: URL?
     let supportsSummarization: Bool
@@ -23,10 +24,22 @@ struct ProviderConfig {
     }
 
     // 🔹 Добавим флаг (можно объединить с supportsSummarization, если хочешь)
-    var supportsContext: Bool {
-        return supportsSummarization && summarizationURL != nil
-    }
+    //var supportsContext: Bool {
+    //    return supportsSummarization && summarizationURL != nil
+    //}
 
+    var apiKey: String {
+            UserDefaults.standard.string(forKey: apiKeyName) ?? ""
+        }
+
+        var supportsContext: Bool {
+            return supportsSummarization || summarizationURL != nil
+        }
+
+        func getApiKey() -> String {
+            return UserDefaults.standard.string(forKey: apiKeyName) ?? ""
+        }
+    
     // 🔹 Метод генерации summary
     func generateSummary(text: String, apiKey: String) -> String? {
         guard supportsSummarization, let summaryURL = summarizationURL else {

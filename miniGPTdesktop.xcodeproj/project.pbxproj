@@ -13,6 +13,7 @@
 		5030C4C82E092A93002FA399 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C72E092A8E002FA399 /* ChatView.swift */; };
 		5030C4CA2E092AAF002FA399 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4C92E092AAC002FA399 /* SettingsView.swift */; };
 		5030C4CC2E092AC8002FA399 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5030C4CB2E092AC6002FA399 /* AboutView.swift */; };
+		5057A00B2E203B1800E53545 /* providers.json in Resources */ = {isa = PBXBuildFile; fileRef = 5057A00A2E203AF700E53545 /* providers.json */; };
 		508B2CE62E0B164600294DD6 /* ChatUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE52E0B163F00294DD6 /* ChatUtils.swift */; };
 		508B2CE82E0B172600294DD6 /* ProviderConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE72E0B170800294DD6 /* ProviderConfig.swift */; };
 		508B2CEA2E0B1B1200294DD6 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508B2CE92E0B1B0C00294DD6 /* Models.swift */; };
@@ -28,6 +29,7 @@
 		5030C4C92E092AAC002FA399 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		5030C4CB2E092AC6002FA399 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		504DD81C2E054358006D5586 /* miniGPTdesktop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = miniGPTdesktop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5057A00A2E203AF700E53545 /* providers.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = providers.json; sourceTree = "<group>"; };
 		508B2CE52E0B163F00294DD6 /* ChatUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUtils.swift; sourceTree = "<group>"; };
 		508B2CE72E0B170800294DD6 /* ProviderConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderConfig.swift; sourceTree = "<group>"; };
 		508B2CE92E0B1B0C00294DD6 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		504DD8132E054358006D5586 = {
 			isa = PBXGroup;
 			children = (
+				5057A0092E203AE100E53545 /* Resources */,
 				508B2CE42E0B163800294DD6 /* Utils */,
 				5014B6692E067E62003CCF1A /* App */,
 				5014B6682E067E5A003CCF1A /* Persistence */,
@@ -113,6 +116,14 @@
 				504DD81C2E054358006D5586 /* miniGPTdesktop.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5057A0092E203AE100E53545 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5057A00A2E203AF700E53545 /* providers.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		508B2CE42E0B163800294DD6 /* Utils */ = {
@@ -191,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5057A00B2E203B1800E53545 /* providers.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,7 @@ struct ChatView: View {
         
         VStack(alignment: .leading, spacing: 12) {
             Picker("Provider", selection: $selectedProviderId) {
-                ForEach(AIProviderRegistry.shared.providersList, id: \.id) { provider in
+                ForEach(AIProviderRegistry.shared.providers, id: \.id) { provider in
                     Text(provider.name).tag(provider.id)
                 }
             }
